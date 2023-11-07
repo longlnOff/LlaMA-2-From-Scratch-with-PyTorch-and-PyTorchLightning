@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import os
 current = os.path.dirname(os.path.realpath(__file__))
-path_git = str(Path(current).resolve().parents[2])
+path_git = str(Path(current).resolve().parents[1])
 sys.path.append(path_git)
 from Source.ModelArgs import *
 
@@ -42,12 +42,9 @@ class RMSNorm(torch.nn.Module):
     
 
 if __name__ == '__main__':
-    a = torch.rand([2, 4, 10])
-    rms_test = RMSNorm(10)
-
-    m = rms_test(a)
-    n = rms_test.forward1(a)
-
-   
-    eq = torch.isclose(input=m, other=n, rtol=13-5, atol=1e-6)
-    print(eq)
+    model = RMSNorm(features_dimenstion=512,
+                           epsilon=1e-5,
+                           dropout=0.1)
+    print('here')
+    print(f'model size: {sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:02.3f}M parameters')
+    

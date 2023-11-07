@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import os
 current = os.path.dirname(os.path.realpath(__file__))
-path_git = str(Path(current).resolve().parents[2])
+path_git = str(Path(current).resolve().parents[1])
 sys.path.append(path_git)
 from Source.ModelArgs import *
 
@@ -13,7 +13,7 @@ def precompute_theta_pos_frquencies(head_dimension: int, seq_len: int, theta: fl
     
     d_divide_2 = torch.arange(0, head_dimension // 2, 1, dtype=torch.float32)
     # shape = [head_dimension / 2]
-    print(d_divide_2)
+    # print(d_divide_2)
     theta_matrix = theta ** (-2 * (d_divide_2) / float(head_dimension))
     # shape = [head_dimension / 2]
 
